@@ -30,7 +30,7 @@ class MobileDetect
   #@return bool
   def mobile?
     (check_http_headers_for_mobile or
-    match_detection_rules_against_UA)
+    match_detection_rules_against_UA rules)
   end
 
   #set the hash of http headers, from env in rails or sinatra
@@ -156,7 +156,7 @@ private
     #Find a detection rule that matches the current User-agent.
     #not including deprecated params
     #@return bool
-    def match_detection_rules_against_UA rules = rules
+    def match_detection_rules_against_UA rules
       # not sure why the empty check is needed here.. not doing it
       rules.each do |regex|
         return true if match regex
